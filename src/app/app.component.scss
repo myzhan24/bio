@@ -1,3 +1,5 @@
+@import '../variables';
+
 .example-container {
   position: absolute;
   top: 0;
@@ -14,10 +16,12 @@
 }
 
 .app-toolbar {
-  height: 56px;
+  @extend .primary-background;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
+  z-index: 2;
 }
 
 .app-body {

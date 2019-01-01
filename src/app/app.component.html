@@ -1,31 +1,31 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<mat-toolbar>
-  <span>My Application</span>
+<mat-toolbar class="app-toolbar mat-elevation-z6">
+    <button mat-button (click)="sidenav.toggle()">Toggle</button>
+    <span>My Application</span>
 </mat-toolbar>
 <mat-sidenav-container class="app-body">
-  <mat-sidenav #sidenav [mode]="mode.value">
-    <p><button mat-button (click)="sidenav.toggle()">Toggle</button></p>
-    <p>
-      <mat-radio-group class="example-radio-group" [formControl]="mode">
-        <label>Mode:</label>
-        <mat-radio-button value="over">Over</mat-radio-button>
-        <mat-radio-button value="side">Side</mat-radio-button>
-        <mat-radio-button value="push">Push</mat-radio-button>
-      </mat-radio-group>
-    </p>
-  </mat-sidenav>
+    <mat-sidenav #sidenav [mode]="mode.value">
+        <p></p>
+        <p>
+            <mat-radio-group class="example-radio-group" [formControl]="mode">
+                <label>Mode:</label>
+                <mat-radio-button value="over">Over</mat-radio-button>
+                <mat-radio-button value="side">Side</mat-radio-button>
+                <mat-radio-button value="push">Push</mat-radio-button>
+            </mat-radio-group>
+        </p>
+    </mat-sidenav>
 
-  <mat-sidenav-content>
-    <p><button mat-button (click)="sidenav.toggle()">Toggle</button></p>
-    <p>
-      <mat-radio-group class="example-radio-group" [formControl]="mode">
-        <label>Mode:</label>
-        <mat-radio-button value="over">Over</mat-radio-button>
-        <mat-radio-button value="side">Side</mat-radio-button>
-        <mat-radio-button value="push">Push</mat-radio-button>
-      </mat-radio-group>
-    </p>
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
+    <mat-sidenav-content>
+        <p>
+            <mat-radio-group class="example-radio-group" [formControl]="mode">
+                <label>Mode:</label>
+                <mat-radio-button value="over">Over</mat-radio-button>
+                <mat-radio-button value="side">Side</mat-radio-button>
+                <mat-radio-button value="push">Push</mat-radio-button>
+            </mat-radio-group>
+        </p>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
 </mat-sidenav-container>
 
