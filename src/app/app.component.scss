@@ -12,3 +12,21 @@
   margin: 20px;
   padding: 10px;
 }
+
+.app-toolbar {
+  height: 56px;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.app-body {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 64px;
+  //top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

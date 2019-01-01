@@ -1,6 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
-
-<mat-sidenav-container class="example-container">
+<mat-toolbar>
+  <span>My Application</span>
+</mat-toolbar>
+<mat-sidenav-container class="app-body">
   <mat-sidenav #sidenav [mode]="mode.value">
     <p><button mat-button (click)="sidenav.toggle()">Toggle</button></p>
     <p>
