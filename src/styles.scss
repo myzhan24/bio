@@ -12,3 +12,17 @@ body {
   margin: 0;
 }
 
+.page-body {
+  font-family: "Helvetica Neue";
+  margin: $page-body-margin;
+}
+
+.page-h1 {
+  font-family: "Helvetica Neue";
+  font-size: 2em;
+  color: white;
+  background-color: mat-color($bio-app-primary, 0.3);
+  margin: 0;
+  padding: 10px 50px;
+}
+

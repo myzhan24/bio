@@ -15,6 +15,9 @@ $bio-app-theme: mat-light-theme($bio-app-primary, $bio-app-accent, $bio-app-warn
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 
+$toolbar-height: 50px;
+$page-body-margin: 50px;
+
 .primary-background {
   color: white;
   background: mat-color($bio-app-primary);
