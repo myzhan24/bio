@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormModule } from './form/form.module';
 import { EarthboundModule } from './earthbound/earthbound.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ScriptService } from './script/script.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormModule,
     EarthboundModule
   ],
-  providers: [],
+  providers: [ScriptService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
