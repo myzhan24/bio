@@ -29,8 +29,6 @@ export class EarthboundComponent implements OnInit, OnDestroy {
   scrollEvent = (event: any): void => {
     const number = event.srcElement.scrollTop;
     // console.log('scroll', number);
-    if (number <= this.maxCanvasHeight) {
-      this.canvasTransform = {'transform': `translateY(${number/1.75}px)`};
-    }
+    this.canvasTransform = {'transform': `translateY(${number/1.75}px)`};
   };
 }
