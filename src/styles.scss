@@ -39,7 +39,6 @@ body {
 
 .example-card {
   max-width: 400px;
-  margin-bottom: 50px;
 }
 
 .example-header-image {
@@ -96,7 +95,7 @@ a.pointer {
   flex-direction: column;
   flex: 1;
   align-items: center;
-  margin: 3vw 2vw 10vw 2vw;
+  margin: 3vw 2vw 0 2vw;
 }
 
 .earthbound-wrapper {

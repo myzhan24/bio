@@ -9,11 +9,13 @@ import { FormModule } from './form/form.module';
 import { EarthboundModule } from './earthbound/earthbound.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ScriptService } from './script/script.service';
+import { ResumeComponent } from './resume/resume.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    ResumeComponent
   ],
   imports: [
     BrowserModule,

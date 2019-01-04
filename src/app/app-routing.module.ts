@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { ResumeComponent } from './resume/resume.component';
 
 export const routes: Routes = [
   {
@@ -13,6 +14,13 @@ export const routes: Routes = [
     component: HomeComponent,
     data: {
       title: 'Home'
+    }
+  },
+  {
+    path: 'resume',
+    component: ResumeComponent,
+    data: {
+      title: 'Resume'
     }
   }
 ];
