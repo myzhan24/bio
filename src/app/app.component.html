@@ -1,23 +1,19 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <mat-toolbar class="app-toolbar mat-elevation-z6">
-    <button mat-button (click)="sidenav.toggle()">Toggle</button>
-    <span>Matt Zhan</span>
+  <button mat-button (click)="sidenav.toggle()">Toggle</button>
+  <span>Matt Zhan</span>
 </mat-toolbar>
 <mat-sidenav-container class="app-body">
-    <mat-sidenav #sidenav [mode]="mode.value">
-        <p></p>
-        <p>
-            <mat-radio-group class="example-radio-group" [formControl]="mode">
-                <label>Mode:</label>
-                <mat-radio-button value="over">Over</mat-radio-button>
-                <mat-radio-button value="side">Side</mat-radio-button>
-                <mat-radio-button value="push">Push</mat-radio-button>
-            </mat-radio-group>
-        </p>
-    </mat-sidenav>
+  <mat-sidenav #sidenav mode="over">
+    <ng-container *ngFor="let route of routes">
+      <div *ngIf="route.data && route.data.title" [routerLink]="route.path">
+        {{route.data.title}}
+      </div>
+    </ng-container>
+  </mat-sidenav>
 
-    <mat-sidenav-content>
-        <router-outlet></router-outlet>
-    </mat-sidenav-content>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
 </mat-sidenav-container>
 

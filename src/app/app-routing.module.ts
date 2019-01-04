@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { EarthboundComponent } from './earthbound/earthbound.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     redirectTo: 'home',
@@ -11,11 +11,17 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
+    data: {
+      title: 'Home'
+    }
   },
   {
     path: 'earthbound',
-    component: EarthboundComponent
+    component: EarthboundComponent,
+    data: {
+      title: 'Earthbound'
+    }
   }
 ];
 
