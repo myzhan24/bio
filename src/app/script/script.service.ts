@@ -22,10 +22,10 @@ export class ScriptService {
     return Promise.all(promises);
   }
 
-  loadScript(name: string) {
+  loadScript(name: string, force: boolean = false) {
     return new Promise((resolve, reject) => {
         // resolve if already loaded
-        if (this.scripts[name].loaded) {
+        if (!force && this.scripts[name].loaded) {
           resolve({
             script: name, loaded: true, status: 'Already Loaded'
           });

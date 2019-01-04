@@ -12,8 +12,8 @@ export class EarthboundComponent implements OnInit, OnDestroy {
   maxCanvasHeight = 400;
 
   constructor(private readonly ss: ScriptService) {
-    this.ss.loadScript('earthbound-script').then(data => {
-      console.log('loaded script!');
+    this.ss.loadScript('earthbound-script', true).then(data => {
+      console.log('earthbound component loading script...', data);
     });
   }
 
@@ -29,6 +29,6 @@ export class EarthboundComponent implements OnInit, OnDestroy {
   scrollEvent = (event: any): void => {
     const number = event.srcElement.scrollTop;
     // console.log('scroll', number);
-    this.canvasTransform = {'transform': `translateY(${number/1.75}px)`};
+    this.canvasTransform = {'transform': `translateY(${number / 1.75}px)`};
   };
 }
