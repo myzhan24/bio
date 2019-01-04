@@ -9,8 +9,6 @@ import { ScriptService } from '../script/script.service';
 export class EarthboundComponent implements OnInit, OnDestroy {
   canvasTransform;
 
-  maxCanvasHeight = 400;
-
   constructor(private readonly ss: ScriptService) {
     this.ss.loadScript('earthbound-script', true).then(data => {
       console.log('earthbound component loading script...', data);
@@ -27,8 +25,6 @@ export class EarthboundComponent implements OnInit, OnDestroy {
 
 
   scrollEvent = (event: any): void => {
-    const number = event.srcElement.scrollTop;
-    // console.log('scroll', number);
-    this.canvasTransform = {'transform': `translateY(${number / 1.75}px)`};
+    this.canvasTransform = {'transform': `translateY(${event.srcElement.scrollTop / 1.75}px)`};
   };
 }
