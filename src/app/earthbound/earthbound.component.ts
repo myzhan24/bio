@@ -8,6 +8,8 @@ import { ScriptService } from '../script/script.service';
 })
 export class EarthboundComponent implements OnInit, OnDestroy {
   canvasTransform;
+  showControls = false;
+  enableParallax = false;
 
   constructor(private readonly ss: ScriptService) {
     this.ss.loadScript('earthbound-script', true).then(data => {
@@ -16,11 +18,15 @@ export class EarthboundComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    window.addEventListener('scroll', this.scrollEvent, true); // third parameter
+    if (this.enableParallax) {
+      window.addEventListener('scroll', this.scrollEvent, true); // third parameter
+    }
   }
 
   ngOnDestroy() {
-    window.removeEventListener('scroll', this.scrollEvent, true);
+    if (this.enableParallax) {
+      window.removeEventListener('scroll', this.scrollEvent, true);
+    }
   }
 
 

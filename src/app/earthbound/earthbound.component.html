@@ -1,9 +1,20 @@
-<body class="w-100 sans-serif">
-<section class="canvas-wrapper pv2">
-  <canvas class="canvas" [ngStyle]="canvasTransform"></canvas>
-</section>
+<canvas class="canvas" [ngStyle]="canvasTransform">
+  Testing
+</canvas>
 
-<section id="everything">
+<div class="test-a">
+  <div class="test">
+    <ng-content></ng-content>
+  </div>
+</div>
+
+
+<!--<div class="canvas-wrapper">-->
+<!--<canvas class="canvas" [ngStyle]="canvasTransform">-->
+<!--Testing-->
+<!--</canvas>-->
+<!--</div>-->
+<section *ngIf="showControls" id="everything">
   <section id="not-canvas">
     <section id="forms">
       <div class="mw9 center ph3-ns">
@@ -59,16 +70,14 @@
                 <div class="w-100 db h2 f5"></div>
                 <div class="w-100 db h2 f5"></div>
 
-                <a id="fullscreen" class="pointer f5 link dim ba ph3 pv2 mv2 mb2 dib black">Go fullscreen!</a> <span class="f6">Hit <kbd>ESC</kbd> to exit.</span>
+                <a id="fullscreen" class="pointer f5 link dim ba ph3 pv2 mv2 mb2 dib black">Go fullscreen!</a> <span
+                class="f6">Hit <kbd>ESC</kbd> to exit.</span>
               </form>
             </div>
           </div>
         </div>
       </div>
     </section>
-
-
-
 
 
   </section>

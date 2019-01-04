@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { EarthboundComponent } from './earthbound/earthbound.component';
 
 export const routes: Routes = [
   {
@@ -14,13 +13,6 @@ export const routes: Routes = [
     component: HomeComponent,
     data: {
       title: 'Home'
-    }
-  },
-  {
-    path: 'earthbound',
-    component: EarthboundComponent,
-    data: {
-      title: 'Earthbound'
     }
   }
 ];
