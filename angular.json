@@ -30,10 +30,6 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "src/assets/utils.js",
-              "src/assets/form.js",
-              "src/assets/history.js",
-              "src/assets/history.adapter.native.js"
             ]
           },
           "configurations": {
