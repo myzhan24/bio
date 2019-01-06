@@ -24,8 +24,10 @@ export class EarthboundCardComponent implements OnInit {
   alpha = 0.5;
 
   constructor(private readonly http: HttpClient) {
-    this.layer1Val = this.getRandomLayer();
-    this.layer2Val = this.getRandomLayer();
+    // this.layer1Val = this.getRandomLayer();
+    // this.layer2Val = this.getRandomLayer();
+    this.layer1Val=269;
+    this.layer2Val=270;
     this.http.get('assets/data/truncated_backgrounds.dat', {
       responseType: 'arraybuffer'
     }).subscribe(data => {
