@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ROM } from '../../earthbound/rom/rom';
 import { BackgroundLayer } from '../../earthbound/rom/background-layer';
 import { Engine } from '../../earthbound/engine';
+import { NUM_LAYERS } from '../../earthbound/constants';
 
 @Component({
   selector: 'app-earthbound',
@@ -12,6 +13,14 @@ import { Engine } from '../../earthbound/engine';
 export class EarthboundComponent implements OnInit {
   backgroundData;
   rom: ROM;
+  engine: Engine;
+  layer1Val = 0;
+  layer2Val = 1;
+  frameskip = 1;
+  aspectRatio = 16;
+  debug = false;
+  fps = 30;
+  alpha = 0.5;
 
   constructor(private readonly http: HttpClient) {
     this.http.get('assets/data/truncated_backgrounds.dat', {
@@ -45,18 +54,9 @@ export class EarthboundComponent implements OnInit {
         */
 
 
-    const layer1Val = 270;
-    const layer2Val = 269;
-    const frameskip = 1;
-    const aspectRatio = 16;
-
-
     // const debug = params.debug === 'true';
     // const debug = true;
-    const debug = false;
 
-    const fps = 30;
-    const alpha = 0.5;
 
     /*if (layer2Val === 0) {
       alpha = 1.0;
@@ -64,19 +64,38 @@ export class EarthboundComponent implements OnInit {
 
     // Create two layers
     // document['BackgroundLayer'] = BackgroundLayer;
-    const layer1 = new BackgroundLayer(layer1Val, this.rom);
-    const layer2 = new BackgroundLayer(layer2Val, this.rom);
+    const layer1 = new BackgroundLayer(this.layer1Val, this.rom);
+    const layer2 = new BackgroundLayer(this.layer2Val, this.rom);
 
     // Create animation engine
-    const engine = new Engine([layer1, layer2], {
-      fps: fps,
-      aspectRatio: aspectRatio,
-      frameSkip: frameskip,
-      alpha: [alpha, alpha],
+    this.engine = new Engine([layer1, layer2], {
+      fps: this.fps,
+      aspectRatio: this.aspectRatio,
+      frameSkip: this.frameskip,
+      alpha: [this.alpha, this.alpha],
       canvas: document.querySelector('canvas')
     });
 
-    engine.animate(debug);
+    this.engine.animate(this.debug);
   }
 
+  mz(): void {
+    this.updateLayers(++this.layer1Val, ++this.layer2Val);
+  }
+
+  updateLayers(layer1Val, layer2Val): void {
+    this.layer1Val = layer1Val;
+    this.layer2Val = layer2Val;
+    const layer1 = new BackgroundLayer(this.layer1Val, this.rom);
+    const layer2 = new BackgroundLayer(this.layer2Val, this.rom);
+    this.engine.layers = [layer1, layer2];
+  }
+
+  setRandomLayers(): void {
+    this.updateLayers(this.getRandomLayer(), this.getRandomLayer());
+  }
+
+  getRandomLayer(): number {
+    return Math.floor(Math.random() * NUM_LAYERS);
+  }
 }

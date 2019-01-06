@@ -1,4 +1,4 @@
-import { HEIGHT, WIDTH } from '../constants';
+import { DEFAULT_LAYER_1, HEIGHT, NUM_LAYERS, WIDTH } from '../constants';
 import { Distorter } from './distorter';
 import { BattleBackground } from './battle-background';
 import { BackgroundGraphics } from './background-graphics';
@@ -14,13 +14,21 @@ export class BackgroundLayer {
   distorter;
   entry;
 
-  constructor(entry, rom) {
+  constructor(entry: number, rom) {
     this.rom = rom;
     this.graphics = null;
     this.paletteCycle = null;
     this.pixels = new Int16Array(WIDTH * HEIGHT * 4);
     this.distorter = new Distorter(this.pixels);
-    this.loadEntry(entry);
+    this.loadEntry(this.transformEntryToValid(entry));
+  }
+
+  private transformEntryToValid(entry: number): number {
+    if (isNaN(entry) || entry < 0 || entry >= NUM_LAYERS) {
+      return DEFAULT_LAYER_1;
+    }
+
+    return entry;
   }
 
   /**

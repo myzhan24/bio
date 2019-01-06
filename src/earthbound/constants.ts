@@ -32,3 +32,6 @@ export const REVERSED_BYTES = generateReversedBytes();
 export const HORIZONTAL = 1;
 export const HORIZONTAL_INTERLACED = 2;
 export const VERTICAL = 3;
+export const DEFAULT_LAYER_1 = 270;
+export const DEFAULT_LAYER_2 = 269;
+export const NUM_LAYERS = 327;
