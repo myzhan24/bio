@@ -1,10 +1,11 @@
 /* In the ROM, each battle background struct at 0xADEA1 takes up 17 bytes. */
 import { STRUCT_SIZE } from '../constants';
-import { readBlock } from '../utils';
+import { Block } from './block';
 
 
 export class BattleBackground {
   bbgData;
+  backgroundData;
 
   /*
   * Background data table: $CADCA1
@@ -28,7 +29,8 @@ export class BattleBackground {
   * 15 Effects
   * 16 Effects
   */
-  constructor(i = 0) {
+  constructor(i = 0, backgroundData) {
+    this.backgroundData = backgroundData;
     this.bbgData = new Int16Array(STRUCT_SIZE);
     this.read(i);
   }
@@ -123,7 +125,7 @@ export class BattleBackground {
   }
 
   read(index) {
-    const main = readBlock(0xDCA1 + index * STRUCT_SIZE);
+    const main = new Block(0xDCA1 + index * STRUCT_SIZE, this.backgroundData);
     for (let i = 0; i < STRUCT_SIZE; ++i) {
       this.bbgData[i] = main.readInt16();
     }

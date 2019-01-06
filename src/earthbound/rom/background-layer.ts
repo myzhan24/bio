@@ -58,7 +58,7 @@ export class BackgroundLayer {
   }
 
   loadEffect(index) {
-    this.distorter.effect = new DistortionEffect(index);
+    this.distorter.effect = new DistortionEffect(index, this.rom.data);
   }
 
   loadEntry(index) {

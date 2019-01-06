@@ -24,14 +24,12 @@ function add(objects, o) {
   objects.get(constructor).push(o);
 }
 
-
-export let data;
-
 export class ROM {
   objects;
+  data;
 
   constructor(stream) {
-    data = stream;
+    this.data = stream;
     this.objects = new Map();
 
     /* The only way to determine the bit depth of each BG Palette is to check the bit depth of the backgrounds that use it.
@@ -39,7 +37,7 @@ export class ROM {
     const paletteBits = new Int32Array(114);
     const graphicsBits = new Int32Array(103);
     for (let i = MINIMUM_INDEX; i <= MAXIMUM_INDEX; ++i) {
-      const background = new BattleBackground(i);
+      const background = new BattleBackground(i, this.data);
       add(this.objects, background);
       /* Now that the background has been read, update the BPP entry for its palette.
       We can also check to make sure palettes are used consistently: */
@@ -53,11 +51,11 @@ export class ROM {
     }
     /* Now load palettes */
     for (let i = 0; i < 114; ++i) {
-      add(this.objects, new BackgroundPalette(i, paletteBits[i]));
+      add(this.objects, new BackgroundPalette(i, paletteBits[i], this.data));
     }
     /* Load graphics */
     for (let i = 0; i < 103; ++i) {
-      add(this.objects, new BackgroundGraphics(i, graphicsBits[i]));
+      add(this.objects, new BackgroundGraphics(i, graphicsBits[i], this.data));
     }
   }
 

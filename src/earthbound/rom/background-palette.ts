@@ -1,22 +1,23 @@
-
 import { snesToHex } from './rom-utils';
-import { readBlock } from '../utils';
+import { Block } from './block';
 
 export class BackgroundPalette {
   colors;
   bitsPerPixel;
   address;
+  backgroundData;
 
-  constructor(index, bitsPerPixel) {
+  constructor(index, bitsPerPixel, backgroundData) {
+    this.backgroundData = backgroundData;
     this.colors = null;
     this.bitsPerPixel = bitsPerPixel;
     this.read(index);
   }
 
   read(index) {
-    const pointer = readBlock(0xDAD9 + index * 4);
+    const pointer = new Block(0xDAD9 + index * 4, this.backgroundData);
     const address = snesToHex(pointer.readInt32());
-    const data = readBlock(address);
+    const data = new Block(address, this.backgroundData);
     this.address = address;
     this.readPalette(data, this.bitsPerPixel, 1);
   }
