@@ -30,8 +30,7 @@ export class EarthboundComponent implements OnInit {
   alpha = 0.5;
 
   constructor(private readonly http: HttpClient) {
-    this.layer1Val = this.getRandomLayer();
-    this.layer2Val = this.getRandomLayer();
+    this.setRandomLayers();
 
     this.http.get('assets/data/truncated_backgrounds.dat', {
       responseType: 'arraybuffer'
@@ -69,16 +68,30 @@ export class EarthboundComponent implements OnInit {
   updateLayers(layer1Val, layer2Val): void {
     this.layer1Val = layer1Val;
     this.layer2Val = layer2Val;
-    const layer1 = new BackgroundLayer(this.layer1Val, this.rom);
-    const layer2 = new BackgroundLayer(this.layer2Val, this.rom);
-    this.engine.layers = [layer1, layer2];
+    if (this.engine != null) {
+      const layer1 = new BackgroundLayer(this.layer1Val, this.rom);
+      const layer2 = new BackgroundLayer(this.layer2Val, this.rom);
+      this.engine.layers = [layer1, layer2];
+    }
   }
 
   setRandomLayers(): void {
-    this.updateLayers(this.getRandomLayer(), this.getRandomLayer());
+    const randomNumbers: Array<number> = this.getTwoRandomNumbers();
+    this.updateLayers(randomNumbers[0], randomNumbers[1]);
   }
 
   getRandomLayer(): number {
     return Math.floor(Math.random() * NUM_LAYERS);
+  }
+
+  getTwoRandomNumbers(): number[] {
+    const ret: Array<number> = new Array(2);
+
+    ret[0] = this.getRandomLayer();
+    do {
+      ret[1] = this.getRandomLayer();
+    } while (ret[0] === ret[1]);
+
+    return ret;
   }
 }
