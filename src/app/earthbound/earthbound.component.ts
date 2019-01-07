@@ -139,12 +139,13 @@ export class EarthboundComponent implements OnInit, AfterViewInit, OnDestroy, On
 
   setRandomLayers(): void {
     const randomNumbers: Array<number> = this.getTwoRandomNumbers();
-    this.updateLayers(randomNumbers[0], this.layer2Val);
+    this.updateLayers(randomNumbers[0], randomNumbers[1]);
   }
 
   private getRandomLayer(): number {
     return Math.floor(Math.random() * NUM_LAYERS);
   }
+
 
   private getTwoRandomNumbers(): number[] {
     const ret: Array<number> = new Array(2);

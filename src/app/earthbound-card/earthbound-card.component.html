@@ -1,16 +1,16 @@
 <mat-card class="example-card">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>Shiba Inu</mat-card-title>
-    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+    <mat-card-title>Earthbound Battle Backgrounds</mat-card-title>
+    <mat-card-subtitle>A TypeScript port of the background rendering engine from Nintendo's 1994 cult classic game
+    </mat-card-subtitle>
   </mat-card-header>
-  <app-earthbound #earthboundComponent
-                  class="full-card-width"
-                  [(layer1)]="layer1"
-                  [(layer2)]="layer2"></app-earthbound>
-  <mat-card-content>
-    {{layer1}}
-    {{layer2}}
+  <app-earthbound #earthboundComponent class="full-card-width" [(layer1)]="layer1" [(layer2)]="layer2"></app-earthbound>
+  <mat-card-content class="container">
+    <div class="row">
+      {{earthboundComponent.layer1}}
+      {{earthboundComponent.layer2}}
+    </div>
     <mat-form-field>
       <mat-select [(value)]="layer1">
         <mat-option [value]="num" *ngFor="let num of layerNumbers">{{num}}</mat-option>
@@ -25,7 +25,6 @@
 
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>LIKE</button>
     <button mat-button (click)="setRandomLayers()">Random</button>
   </mat-card-actions>
 </mat-card>
