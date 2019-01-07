@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ROM } from '../../earthbound/rom/rom';
 import { BackgroundLayer } from '../../earthbound/rom/background-layer';
@@ -11,6 +11,7 @@ import { NUM_LAYERS } from '../../earthbound/constants';
   styleUrls: ['./earthbound.component.scss']
 })
 export class EarthboundComponent implements OnInit {
+  @ViewChild('earthboundCanvas') earthboundCanvas;
   backgroundData;
   rom: ROM;
   engine: Engine;
@@ -23,14 +24,12 @@ export class EarthboundComponent implements OnInit {
   alpha = 0.5;
 
   constructor(private readonly http: HttpClient) {
+    this.layer1Val = this.getRandomLayer();
+    this.layer2Val = this.getRandomLayer();
+
     this.http.get('assets/data/truncated_backgrounds.dat', {
       responseType: 'arraybuffer'
     }).subscribe(data => {
-      console.log(data);
-      // let backgroundData = new Uint8Array(Array.from(data).map(x => x.charCodeAt(0)));
-      // let fr = new FileReader();
-      // let xx = fr.readAsArrayBuffer(data);
-      // console.log(xx);
       this.backgroundData = new Uint8Array(data);
       this.rom = new ROM(this.backgroundData);
       this.setupEngine();
@@ -73,7 +72,7 @@ export class EarthboundComponent implements OnInit {
       aspectRatio: this.aspectRatio,
       frameSkip: this.frameskip,
       alpha: [this.alpha, this.alpha],
-      canvas: document.querySelector('canvas')
+      canvas: this.earthboundCanvas.nativeElement
     });
 
     this.engine.animate(this.debug);
