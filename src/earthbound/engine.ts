@@ -10,6 +10,7 @@ export class Engine {
   tick;
   frameID;
   destroy;
+  private readonly debug = false;
 
   constructor(layers = [], opts) {
     this.frameID = -1;
@@ -23,7 +24,7 @@ export class Engine {
     this.destroy = false;
   }
 
-  animate(debug) {
+  animate() {
     let then = Date.now();
     let elapsed;
     const fpsInterval = 1000 / this.fps;
@@ -53,7 +54,7 @@ export class Engine {
       if (elapsed > fpsInterval) {
         then = now - (elapsed % fpsInterval);
         for (let i = 0; i < this.layers.length; ++i) {
-          if (debug) {
+          if (this.debug) {
             console.log(canvas.toDataURL());
           }
           bitmap = this.layers[i].overlayFrame(image.data, this.aspectRatio, this.tick, this.alpha[i], i === 0);

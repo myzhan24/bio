@@ -17,6 +17,7 @@
 
 .app-toolbar {
   @extend .primary-background;
+  background: black;
   position: fixed;
   height: $toolbar-height;
   top: 0;

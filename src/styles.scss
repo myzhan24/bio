@@ -10,17 +10,16 @@
 
 body {
   margin: 0;
+  background: whitesmoke;
 }
 
 .page-body {
   font-family: "Helvetica Neue";
   margin: $page-body-margin;
-
-  &.center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
 }
 
 .page-h1 {
@@ -104,4 +103,39 @@ a.pointer {
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+.earthbound-canvas {
+  image-rendering: pixelated;
+  width: 100%;
+}
+
+.full-card-width {
+  .earthbound-canvas {
+    margin-left: $negative-card-margin;
+    width: calc(100% + 32px);
+  }
+}
+
+.mz {
+  animation: 10s ease-in-out animation-rotate-sway;
+  animation-iteration-count: infinite;
+}
+
+@keyframes animation-rotate-sway {
+  0% {
+    transform: rotate3d(0, 0, 1, 0);
+  }
+
+  25% {
+    transform: rotate3d(0, 0, 1, -0.5deg);
+  }
+
+  75% {
+    transform: rotate3d(0, 0, 1, 0.5deg);
+  }
+
+  100% {
+    transform: rotate3d(0, 0, 1, 0);
+  }
 }

@@ -4,7 +4,7 @@
     <mat-card-title>Shiba Inu</mat-card-title>
     <mat-card-subtitle>Dog Breed</mat-card-subtitle>
   </mat-card-header>
-  <app-earthbound></app-earthbound>
+  <app-earthbound #earthboundComponent class="full-card-width"></app-earthbound>
   <mat-card-content>
     <section id="everything">
       <section id="not-canvas">
@@ -14,6 +14,10 @@
               <div class="fl w-100 w-50-ns pa2">
                 <div class="pv2">
                   <form class="pa2 black-80">
+
+                    {{earthboundComponent.layer1}}
+                    {{earthboundComponent.layer2}}
+
                     <label for="layer1" class="f5 b db mv2 mb2">Layer 1</label>
                     <select id="layer1" class="w-100 db h2 f5 bg-near-white ba b--sliver">
                       <!-- generated in forms.js -->
@@ -77,7 +81,7 @@
   </mat-card-content>
   <mat-card-actions>
     <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
+    <button mat-button (click)="setRandomLayers()">Random</button>
   </mat-card-actions>
 </mat-card>
 

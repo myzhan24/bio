@@ -17,6 +17,9 @@ $bio-app-theme: mat-light-theme($bio-app-primary, $bio-app-accent, $bio-app-warn
 
 $toolbar-height: 50px;
 $page-body-margin: 2vw;
+$card-margin: 16px;
+$card-margin-x2: 32px;
+$negative-card-margin: -16px;
 
 .primary-background {
   color: white;
