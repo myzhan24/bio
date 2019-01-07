@@ -44,10 +44,6 @@ export class Engine {
     canvas.height = SNES_HEIGHT;
     const image = context.getImageData(0, 0, canvas.width, canvas.height);
     const drawFrame = () => {
-      if (this.destroy) {
-        return;
-      }
-
       this.frameID = requestAnimationFrame(drawFrame);
       const now = Date.now();
       elapsed = now - then;
@@ -63,6 +59,10 @@ export class Engine {
         this.tick += this.frameSkip;
         image.data.set(bitmap);
         context.putImageData(image, 0, 0);
+      }
+
+      if (this.destroy) {
+        window.cancelAnimationFrame(this.frameID);
       }
     };
     if (this.frameID > 0) {

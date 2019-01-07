@@ -25,6 +25,7 @@ import { take } from 'rxjs/operators';
 export class EarthboundComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   @ViewChild('earthboundCanvas') earthboundCanvas;
   rom: ROM;
+  lastEngine: Engine;
   engine: Engine;
   layer1Val = 0;
   bgData: Uint8Array;
@@ -83,6 +84,8 @@ export class EarthboundComponent implements OnInit, AfterViewInit, OnDestroy, On
    * @param bgData - x
    */
   private setupEngine(bgData: Uint8Array) {
+    this.lastEngine = this.engine;
+
     // Create two layers
     const backgroundLayer1 = new BackgroundLayer(this.layer1Val, this.rom);
     const backgroundLayer2 = new BackgroundLayer(this.layer2Val, this.rom);
@@ -98,6 +101,14 @@ export class EarthboundComponent implements OnInit, AfterViewInit, OnDestroy, On
 
     // Start animation loop
     this.engine.animate();
+
+    // Destroy the last engine object if it exists
+    if (this.lastEngine != null) {
+      const self = this;
+      requestAnimationFrame(() => {
+        self.lastEngine.cleanUp();
+      });
+    }
   }
 
   updateLayers(layer1Val, layer2Val): void {
@@ -117,9 +128,9 @@ export class EarthboundComponent implements OnInit, AfterViewInit, OnDestroy, On
   }
 
   resetEngine(): void {
-    if (this.engine != null) {
-      this.engine.cleanUp();
-    }
+    // if (this.engine != null) {
+    //   this.engine.cleanUp();
+    // }
 
     if (this.bgData != null) {
       this.setupEngine(this.bgData);
