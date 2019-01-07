@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ROM } from '../../earthbound/rom/rom';
 import { BackgroundLayer } from '../../earthbound/rom/background-layer';
 import { Engine } from '../../earthbound/engine';
 import { NUM_LAYERS } from '../../earthbound/constants';
+import { BackgroundLayerDataService } from './background-layer-data.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-earthbound',
@@ -12,7 +13,6 @@ import { NUM_LAYERS } from '../../earthbound/constants';
 })
 export class EarthboundComponent implements OnInit {
   @ViewChild('earthboundCanvas') earthboundCanvas;
-  backgroundData;
   rom: ROM;
   engine: Engine;
   layer1Val = 0;
@@ -29,22 +29,20 @@ export class EarthboundComponent implements OnInit {
   fps = 30;
   alpha = 0.5;
 
-  constructor(private readonly http: HttpClient) {
+  constructor(private readonly backgrounds: BackgroundLayerDataService) {
     this.setRandomLayers();
-
-    this.http.get('assets/data/truncated_backgrounds.dat', {
-      responseType: 'arraybuffer'
-    }).subscribe(data => {
-      this.backgroundData = new Uint8Array(data);
-      this.rom = new ROM(this.backgroundData);
-      this.setupEngine();
+    this.backgrounds.backgroundData$.pipe(take(1)).subscribe(bgData => {
+      this.setupEngine(bgData);
     });
   }
 
   ngOnInit() {
   }
 
-  setupEngine() {
+  setupEngine(bgData: Uint8Array) {
+    // initialize ROM Object
+
+    this.rom = new ROM(bgData);
     // Create two layers
     const layer1 = new BackgroundLayer(this.layer1Val, this.rom);
     const layer2 = new BackgroundLayer(this.layer2Val, this.rom);
