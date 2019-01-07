@@ -15,7 +15,7 @@ body {
 
 .page-body {
   font-family: "Helvetica Neue";
-  margin: $page-body-margin;
+  margin: $page-body-margin $page-body-margin 0 $page-body-margin;
   display: flex;
   flex: 1;
   flex-direction: column;
