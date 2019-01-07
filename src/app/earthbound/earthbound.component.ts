@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ROM } from '../../earthbound/rom/rom';
 import { BackgroundLayer } from '../../earthbound/rom/background-layer';
 import { Engine } from '../../earthbound/engine';
@@ -11,7 +11,8 @@ import { take } from 'rxjs/operators';
   templateUrl: './earthbound.component.html',
   styleUrls: ['./earthbound.component.scss']
 })
-export class EarthboundComponent implements OnInit, AfterViewInit {
+export class EarthboundComponent implements OnInit, AfterViewInit, OnDestroy {
+
   @ViewChild('earthboundCanvas') earthboundCanvas;
   rom: ROM;
   engine: Engine;
@@ -96,5 +97,9 @@ export class EarthboundComponent implements OnInit, AfterViewInit {
     this.backgrounds.backgroundData$.pipe(take(1)).subscribe(bgData => {
       this.setupEngine(bgData);
     });
+  }
+
+  ngOnDestroy(): void {
+    this.engine.cleanUp();
   }
 }

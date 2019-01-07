@@ -9,6 +9,7 @@ export class Engine {
   canvas;
   tick;
   frameID;
+  destroy;
 
   constructor(layers = [], opts) {
     this.frameID = -1;
@@ -19,6 +20,7 @@ export class Engine {
     this.alpha = opts.alpha;
     this.canvas = opts.canvas;
     this.tick = 0;
+    this.destroy = false;
   }
 
   animate(debug) {
@@ -41,6 +43,10 @@ export class Engine {
     canvas.height = SNES_HEIGHT;
     const image = context.getImageData(0, 0, canvas.width, canvas.height);
     const drawFrame = () => {
+      if (this.destroy) {
+        return;
+      }
+
       this.frameID = requestAnimationFrame(drawFrame);
       const now = Date.now();
       elapsed = now - then;
@@ -61,6 +67,11 @@ export class Engine {
       // todo ? used to be global.cancelAnimationFrame
       window.cancelAnimationFrame(this.frameID);
     }
+
     drawFrame();
+  }
+
+  cleanUp(): void {
+    this.destroy = true;
   }
 }
