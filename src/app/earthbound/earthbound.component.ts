@@ -18,7 +18,13 @@ export class EarthboundComponent implements OnInit {
   layer1Val = 0;
   layer2Val = 1;
   frameskip = 1;
-  aspectRatio = 16;
+  /**
+   * 0 = 8:7
+   * 16 = 4:3
+   * 48 = 2:1
+   * 64 = 8:3
+   */
+  aspectRatio = 0;
   debug = false;
   fps = 30;
   alpha = 0.5;
