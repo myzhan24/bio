@@ -24,11 +24,11 @@ export class BackgroundLayer {
   }
 
   private transformEntryToValid(entry: number): number {
+    let ret = entry;
     if (isNaN(entry) || entry < 0 || entry >= NUM_LAYERS) {
-      return DEFAULT_LAYER_1;
+      ret = DEFAULT_LAYER_1;
     }
-
-    return entry;
+    return ret;
   }
 
   /**

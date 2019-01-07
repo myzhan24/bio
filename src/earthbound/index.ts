@@ -18,7 +18,7 @@ export class EarthBoundIndex {
     const loader = null;
 
     const layer1 = parseLayerParam(params.layer1, {firstLayer: true});
-    const layer2 = parseLayerParam(params.layer2, {firstLayer: false});
+    const layer2Val = parseLayerParam(params.layer2Val, {firstLayer: false});
     const frameskip = parseFrameskipParam(params.frameskip);
     const aspectRatio = parseAspectRatioParam(params.aspectRatio);
     parseFullscreen(params.fullscreen);
@@ -28,17 +28,17 @@ export class EarthBoundIndex {
     const fps = 30;
     let alpha = 0.5;
 
-    if (layer2 === 0) {
+    if (layer2Val === 0) {
       alpha = 1.0;
     }
 
     // Create two layers
     document.BackgroundLayer = BackgroundLayer;
     const layer1 = new document.BackgroundLayer(layer1, ROM);
-    const layer2 = new document.BackgroundLayer(layer2, ROM);
+    const layer2Val = new document.BackgroundLayer(layer2Val, ROM);
 
     // Create animation engine
-    const engine = new Engine([layer1, layer2], {
+    const engine = new Engine([layer1, layer2Val], {
       fps: fps,
       aspectRatio: aspectRatio,
       frameSkip: frameskip,

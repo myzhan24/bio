@@ -1,4 +1,15 @@
-import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import { ROM } from '../../earthbound/rom/rom';
 import { BackgroundLayer } from '../../earthbound/rom/background-layer';
 import { Engine } from '../../earthbound/engine';
@@ -15,10 +26,38 @@ export class EarthboundComponent implements OnInit, AfterViewInit, OnDestroy, On
   @ViewChild('earthboundCanvas') earthboundCanvas;
   rom: ROM;
   engine: Engine;
+  layer1Val = 0;
+  bgData: Uint8Array;
+
   @Input()
-  layer1 = 0;
+  get layer1() {
+    return this.layer1Val;
+  }
+
+  set layer1(val: number) {
+    this.layer1Val = val;
+    this.applyLayer1(val);
+    this.layer1Change.emit(val);
+  }
+
+  @Output()
+  layer1Change = new EventEmitter<number>();
+
   @Input()
-  layer2 = 1;
+  get layer2() {
+    return this.layer2Val;
+  }
+
+  set layer2(val: number) {
+    this.layer2Val = val;
+    this.applyLayer2(val);
+    this.layer2Change.emit(val);
+  }
+
+  @Output()
+  layer2Change = new EventEmitter<number>();
+
+  layer2Val = 1;
   frameskip = 1;
   /**
    * 0 = 8:7
@@ -31,8 +70,9 @@ export class EarthboundComponent implements OnInit, AfterViewInit, OnDestroy, On
   alpha = 0.5;
 
   constructor(private readonly backgrounds: BackgroundLayerDataService) {
-     this.setRandomLayers();
+    this.setRandomLayers();
   }
+
 
   ngOnInit() {
 
@@ -40,15 +80,12 @@ export class EarthboundComponent implements OnInit, AfterViewInit, OnDestroy, On
 
   /**
    * Run this one time
-   * @param bgData
+   * @param bgData - x
    */
   private setupEngine(bgData: Uint8Array) {
-    // initialize ROM Object
-    this.rom = new ROM(bgData);
-
     // Create two layers
-    const backgroundLayer1 = new BackgroundLayer(this.layer1, this.rom);
-    const backgroundLayer2 = new BackgroundLayer(this.layer2, this.rom);
+    const backgroundLayer1 = new BackgroundLayer(this.layer1Val, this.rom);
+    const backgroundLayer2 = new BackgroundLayer(this.layer2Val, this.rom);
 
     // Create animation engine
     this.engine = new Engine([backgroundLayer1, backgroundLayer2], {
@@ -64,18 +101,45 @@ export class EarthboundComponent implements OnInit, AfterViewInit, OnDestroy, On
   }
 
   updateLayers(layer1Val, layer2Val): void {
-    this.layer1 = layer1Val;
-    this.layer2 = layer2Val;
+    this.layer1Val = layer1Val;
+    this.layer2Val = layer2Val;
+    this.applyLayers();
+  }
+
+  applyLayer1(val: number): void {
+
+    this.resetEngine();
+
+  }
+
+  applyLayer2(val: number): void {
+    this.resetEngine();
+  }
+
+  resetEngine(): void {
     if (this.engine != null) {
-      const layer1 = new BackgroundLayer(this.layer1, this.rom);
-      const layer2 = new BackgroundLayer(this.layer2, this.rom);
-      this.engine.layers = [layer1, layer2];
+      this.engine.cleanUp();
     }
+
+    if (this.bgData != null) {
+      this.setupEngine(this.bgData);
+    }
+  }
+
+  applyLayers(): void {
+    // if (this.engine != null) {
+    //   const layer1 = new BackgroundLayer(this.layer1Val, this.rom);
+    //   const layer2 = new BackgroundLayer(this.layer2Val, this.rom);
+    //   this.engine.layers = [layer1, layer2];
+    //   console.log('mz engine layers', this.layer1Val, this.layer2Val, this.engine.layers);
+    // }
+
+    this.resetEngine();
   }
 
   setRandomLayers(): void {
     const randomNumbers: Array<number> = this.getTwoRandomNumbers();
-    this.updateLayers(randomNumbers[0], randomNumbers[1]);
+    this.updateLayers(randomNumbers[0], this.layer2Val);
   }
 
   private getRandomLayer(): number {
@@ -95,6 +159,9 @@ export class EarthboundComponent implements OnInit, AfterViewInit, OnDestroy, On
 
   ngAfterViewInit(): void {
     this.backgrounds.backgroundData$.pipe(take(1)).subscribe(bgData => {
+      this.bgData = bgData;
+      // initialize ROM Object
+      this.rom = new ROM(bgData);
       this.setupEngine(bgData);
     });
   }
@@ -104,6 +171,11 @@ export class EarthboundComponent implements OnInit, AfterViewInit, OnDestroy, On
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    // console.log('mz ngonchanges', changes);
+    // if (changes['layer1'] || changes['layer2']) {
+    //   console.log('mz layer1 and layer2', this.layer1Val, this.layer2Val);
+    //   this.updateLayers(this.layer1Val, this.layer1Val);
+    // }
 
   }
 }

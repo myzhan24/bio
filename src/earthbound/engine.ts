@@ -57,6 +57,7 @@ export class Engine {
           if (this.debug) {
             console.log(canvas.toDataURL());
           }
+
           bitmap = this.layers[i].overlayFrame(image.data, this.aspectRatio, this.tick, this.alpha[i], i === 0);
         }
         this.tick += this.frameSkip;
