@@ -4,7 +4,6 @@ import { getJsonFromUrl, parseAspectRatioParam, parseFrameskipParam, parseFullsc
 import { BackgroundLayer } from './rom/background-layer';
 import { Engine } from './engine';
 
-// todo load background data
 // const backgroundData = new Uint8Array(Array.from(data).map(x => x.charCodeAt(0)));
 //
 // export const ROM = new Rom(backgroundData);

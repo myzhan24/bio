@@ -46,29 +46,7 @@ export class EarthboundComponent implements OnInit {
   }
 
   setupEngine() {
-    // this.rom = new Rom(backgroundData);
-    // const params = getJsonFromUrl();
-    // const loader = null;
-
-    /*
-        const layer1Val = parseLayerParam(params.layer1, {firstLayer: true});
-        const layer2Val = parseLayerParam(params.layer2, {firstLayer: false});
-        const frameskip = parseFrameskipParam(params.frameskip);
-        const aspectRatio = parseAspectRatioParam(params.aspectRatio);
-        parseFullscreen(params.fullscreen);
-        */
-
-
-    // const debug = params.debug === 'true';
-    // const debug = true;
-
-
-    /*if (layer2Val === 0) {
-      alpha = 1.0;
-    }*/
-
     // Create two layers
-    // document['BackgroundLayer'] = BackgroundLayer;
     const layer1 = new BackgroundLayer(this.layer1Val, this.rom);
     const layer2 = new BackgroundLayer(this.layer2Val, this.rom);
 
