@@ -10,7 +10,6 @@ import { EarthboundModule } from './earthbound/earthbound.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ScriptService } from './script/script.service';
 import { ResumeComponent } from './resume/resume.component';
-import { EarthboundCardComponent } from './earthbound-card/earthbound-card.component';
 
 @NgModule({
   declarations: [

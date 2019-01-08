@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ResumeComponent } from './resume/resume.component';
+import { EarthboundGridComponent } from './earthbound-grid/earthbound-grid.component';
 
 export const routes: Routes = [
   {
@@ -14,6 +15,13 @@ export const routes: Routes = [
     component: HomeComponent,
     data: {
       title: 'Home'
+    }
+  },
+  {
+    path: 'earthbound-grid',
+    component: EarthboundGridComponent,
+    data: {
+      title: 'Earthbound Grid'
     }
   },
   {

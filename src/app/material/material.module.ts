@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import { MatCardModule, MatRadioModule, MatSelectModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
+import { MatCardModule, MatGridListModule, MatRadioModule, MatSelectModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -13,7 +13,8 @@ import { MatCardModule, MatRadioModule, MatSelectModule, MatSidenavModule, MatTo
     MatSidenavModule,
     MatRadioModule,
     MatCardModule,
-    MatSelectModule
+    MatSelectModule,
+    MatGridListModule
   ],
   exports: [
     MatButtonModule,
@@ -22,7 +23,8 @@ import { MatCardModule, MatRadioModule, MatSelectModule, MatSidenavModule, MatTo
     MatSidenavModule,
     MatRadioModule,
     MatCardModule,
-    MatSelectModule
+    MatSelectModule,
+    MatGridListModule
   ],
   declarations: []
 })
