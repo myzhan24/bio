@@ -31,6 +31,12 @@ export class EarthboundComponent implements OnInit, AfterViewInit, OnDestroy, On
   bgData: Uint8Array;
 
   @Input()
+  width: number;
+
+  @Input()
+  height: number;
+
+  @Input()
   get layer1() {
     return this.layer1Val;
   }
@@ -96,7 +102,9 @@ export class EarthboundComponent implements OnInit, AfterViewInit, OnDestroy, On
       aspectRatio: this.aspectRatio,
       frameSkip: this.frameskip,
       alpha: [this.alpha, this.alpha],
-      canvas: this.earthboundCanvas.nativeElement
+      canvas: this.earthboundCanvas.nativeElement,
+      width: this.width,
+      height: this.height
     });
 
     // Start animation loop
