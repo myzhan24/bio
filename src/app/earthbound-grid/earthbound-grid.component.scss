@@ -1,0 +1,19 @@
+.outer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.item {
+  display: flex;
+  flex: 1;
+  //
+  //min-width: 256px;
+  //min-height: 224px;
+  height: 100%;
+}
+
+
+.earthbound-grid-list {
+  //height: 100%;
+}
