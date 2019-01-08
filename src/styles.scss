@@ -8,6 +8,10 @@
 @include mat-core();
 @include angular-material-theme($bio-app-theme);
 
+.mat-card-actions .mat-button {
+  @extend .primary-background;
+}
+
 body {
   margin: 0;
   background: whitesmoke;
@@ -117,9 +121,13 @@ a.pointer {
 }
 
 .full-card-width {
+  display: flex;
+  flex:1;
+  margin-left: $negative-card-margin;
+  width: calc(100% + 32px);
+
   .earthbound-canvas {
-    margin-left: $negative-card-margin;
-    width: calc(100% + 32px);
+    height: 100%;
   }
 }
 
