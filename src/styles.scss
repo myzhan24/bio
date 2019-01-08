@@ -131,25 +131,23 @@ a.pointer {
   }
 }
 
-.mz {
-  animation: 10s ease-in-out animation-rotate-sway;
+
+$sway-duration: 4s;
+$sway-degree: 2deg;
+$negative-sway-degree: -2deg;
+
+.sway-animation {
+  animation: $sway-duration ease-in-out animation-rotate-sway;
+  animation-direction: alternate-reverse;
   animation-iteration-count: infinite;
 }
 
 @keyframes animation-rotate-sway {
   0% {
-    transform: rotate3d(0, 0, 1, 0);
-  }
-
-  25% {
-    transform: rotate3d(0, 0, 1, -0.5deg);
-  }
-
-  75% {
-    transform: rotate3d(0, 0, 1, 0.5deg);
+    transform: rotate3d(0, 0, 1, $sway-degree);
   }
 
   100% {
-    transform: rotate3d(0, 0, 1, 0);
+    transform: rotate3d(0, 0, 1, $negative-sway-degree);
   }
 }
