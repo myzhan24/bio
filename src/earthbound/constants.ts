@@ -18,7 +18,7 @@ export const UNKNOWN_2 = 7;
 function generateReversedBytes() {
   const reversedBytes = new Int16Array(256);
   for (let i = 0; i < reversedBytes.length; ++i) {
-    // todo may need to fix this
+    // todo optimize
     const binary = i.toString(2).padStart(8, '0');
     const reversed = binary.split('').reverse().join('');
     const value = Number.parseInt(reversed, 2);

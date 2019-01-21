@@ -13,7 +13,6 @@ import {
 import { ROM } from '../../earthbound/rom/rom';
 import { BackgroundLayer } from '../../earthbound/rom/background-layer';
 import { Engine } from '../../earthbound/engine';
-import { NUM_LAYERS } from '../../earthbound/constants';
 import { BackgroundLayerDataService } from './background-layer-data.service';
 import { take } from 'rxjs/operators';
 
@@ -25,10 +24,12 @@ import { take } from 'rxjs/operators';
 export class EarthboundComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   @ViewChild('earthboundCanvas') earthboundCanvas;
   rom: ROM;
-  lastEngine: Engine;
+  engineCollector: Engine[] = [];
+  engineCollectorTask = null;
   engine: Engine;
   layer1Val = 0;
   bgData: Uint8Array;
+
 
   @Input()
   width: number;
@@ -90,7 +91,9 @@ export class EarthboundComponent implements OnInit, AfterViewInit, OnDestroy, On
    * @param bgData - x
    */
   private setupEngine(bgData: Uint8Array) {
-    this.lastEngine = this.engine;
+    if (this.engine != null) {
+      this.engineCollector.push(this.engine);
+    }
 
     // Create two layers
     const backgroundLayer1 = new BackgroundLayer(this.layer1Val, this.rom);
@@ -111,10 +114,14 @@ export class EarthboundComponent implements OnInit, AfterViewInit, OnDestroy, On
     this.engine.animate();
 
     // Destroy the last engine object if it exists
-    if (this.lastEngine != null) {
+    if (this.engineCollector.length > 0) {
       const self = this;
-      requestAnimationFrame(() => {
-        self.lastEngine.cleanUp();
+
+      // todo this can request multiple animation frames, but each one after a first window is useless
+      this.engineCollectorTask = requestAnimationFrame(() => {
+        while (self.engineCollector.length > 0) {
+          self.engineCollector.pop().cleanUp();
+        }
       });
     }
   }
@@ -126,9 +133,7 @@ export class EarthboundComponent implements OnInit, AfterViewInit, OnDestroy, On
   }
 
   applyLayer1(val: number): void {
-
     this.resetEngine();
-
   }
 
   applyLayer2(val: number): void {
@@ -157,24 +162,8 @@ export class EarthboundComponent implements OnInit, AfterViewInit, OnDestroy, On
   }
 
   setRandomLayers(): void {
-    const randomNumbers: Array<number> = this.getTwoRandomNumbers();
+    const randomNumbers: Array<number> = BackgroundLayer.getRandomLayers();
     this.updateLayers(randomNumbers[0], randomNumbers[1]);
-  }
-
-  private getRandomLayer(): number {
-    return Math.floor(Math.random() * NUM_LAYERS);
-  }
-
-
-  private getTwoRandomNumbers(): number[] {
-    const ret: Array<number> = new Array(2);
-
-    ret[0] = this.getRandomLayer();
-    do {
-      ret[1] = this.getRandomLayer();
-    } while (ret[0] === ret[1]);
-
-    return ret;
   }
 
   ngAfterViewInit(): void {

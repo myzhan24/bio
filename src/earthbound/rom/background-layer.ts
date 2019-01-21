@@ -14,6 +14,22 @@ export class BackgroundLayer {
   distorter;
   entry;
 
+  public static getRandomLayers(): number[] {
+    const ret: Array<number> = new Array(2);
+
+    ret[0] = BackgroundLayer.getRandomLayer();
+    do {
+      ret[1] = BackgroundLayer.getRandomLayer();
+    } while (ret[0] === ret[1]);
+
+    return ret;
+  }
+
+  public static getRandomLayer(): number {
+    return Math.floor(Math.random() * NUM_LAYERS);
+  }
+
+
   constructor(entry: number, rom) {
     this.rom = rom;
     this.graphics = null;

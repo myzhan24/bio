@@ -7,20 +7,16 @@
     <mat-card-subtitle>A TypeScript port of the background rendering engine from Nintendo's 1994 cult classic game
     </mat-card-subtitle>
   </mat-card-header>
-  <app-earthbound #earthboundComponent class="full-card-width" [(layer1)]="layer1" [(layer2)]="layer2"></app-earthbound>
+  <app-earthbound #earthboundComponent class="full-card-width" [layer1]="layer1" [layer2]="layer2"></app-earthbound>
   <mat-card-content class="container">
-    <div class="row">
-      {{earthboundComponent.layer1}}
-      {{earthboundComponent.layer2}}
-    </div>
     <mat-form-field>
-      <mat-select [(value)]="layer1">
+      <mat-select [(value)]="layer1" placeholder="Layer 1">
         <mat-option [value]="num" *ngFor="let num of layerNumbers">{{num}}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field>
-      <mat-select [(value)]="layer2">
+      <mat-select [(value)]="layer2" placeholder="Layer 2">
         <mat-option [value]="num" *ngFor="let num of layerNumbers">{{num}}</mat-option>
       </mat-select>
     </mat-form-field>

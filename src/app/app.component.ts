@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   routes: Routes = routes;
 
   ngOnInit(): void {
-    console.log('routes', this.routes);
+
   }
 
   goToRoute(route: Route): void {
