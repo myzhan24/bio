@@ -119,11 +119,25 @@ a.pointer {
   right: 0;
 }
 
-.exit-button {
-  position: fixed;
+.earthbound-fullscreen-button {
+  position: fixed !important;
   z-index: $z-index-fullscreen-exit;
-  top: $fullscreen-exit-button-top;
-  right: 12px;
+
+  &.exit-button {
+    top: $fullscreen-exit-button-top;
+    right: 8px;
+    opacity: 0.2;
+    transition: opacity 150ms ease-in-out;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &.row-button {
+    bottom: 16px;
+    left: 16px;
+  }
 }
 
 .earthbound-canvas {
@@ -138,6 +152,10 @@ a.pointer {
     top: 0;
     left: 0;
     z-index: $z-index-fullscreen;
+
+    transition: all 500ms ease-in-out;
+    transform: scale(1);
+    transform-origin: 0 0;
   }
 }
 
