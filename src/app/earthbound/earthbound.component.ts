@@ -67,7 +67,7 @@ export class EarthboundComponent implements OnInit, AfterViewInit, OnDestroy, On
   layer2Change = new EventEmitter<number>();
 
   layer2Val = 1;
-  frameskip = 1;
+
   /**
    * 0 = 8:7
    * 16 = 4:3
@@ -75,7 +75,13 @@ export class EarthboundComponent implements OnInit, AfterViewInit, OnDestroy, On
    * 64 = 8:3
    */
   aspectRatio = 0;
-  fps = 30;
+
+  // fps = 30;
+  // frameskip = 1;
+
+  // toying with 60 fps for now
+  fps = 60;
+  frameskip = 0.5;
   alpha = 0.5;
 
   constructor(private readonly backgrounds: BackgroundLayerDataService) {
