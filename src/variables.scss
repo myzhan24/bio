@@ -21,6 +21,12 @@ $card-margin: 16px;
 $card-margin-x2: 32px;
 $negative-card-margin: -16px;
 
+$z-index-fullscreen: 2;
+$z-index-fullscreen-exit: 3;
+
+$fullscreen-exit-button-top: 52px;
+
+
 .primary-background {
   color: white;
   background: mat-color($bio-app-primary);

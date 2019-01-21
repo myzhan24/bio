@@ -23,6 +23,7 @@ import { take } from 'rxjs/operators';
 })
 export class EarthboundComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   @ViewChild('earthboundCanvas') earthboundCanvas;
+  fullscreen = false;
   rom: ROM;
   engineCollector: Engine[] = [];
   engineCollectorTask = null;
@@ -186,5 +187,13 @@ export class EarthboundComponent implements OnInit, AfterViewInit, OnDestroy, On
     //   this.updateLayers(this.layer1Val, this.layer1Val);
     // }
 
+  }
+
+  enterFullscreen(): void {
+    this.fullscreen = true;
+  }
+
+  exitFullscreen(): void {
+    this.fullscreen = false;
   }
 }

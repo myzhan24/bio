@@ -1,1 +1,2 @@
-<canvas #earthboundCanvas class="earthbound-canvas"></canvas>
+<canvas #earthboundCanvas class="earthbound-canvas" [class.fullscreen]="fullscreen"></canvas>
+<button (click)="exitFullscreen()" *ngIf="fullscreen" class="exit-button">X</button>

@@ -13,6 +13,7 @@ export class EarthboundCardComponent implements OnInit {
 
   layer1 = 0;
   layer2 = 1;
+  fullscreen = false;
 
   layerNumbers: Array<number>;
 
@@ -32,4 +33,7 @@ export class EarthboundCardComponent implements OnInit {
     this.layer2 = layers[1];
   }
 
+  toggleFullscreen(): void {
+    this.earthboundComponent.enterFullscreen();
+  }
 }
