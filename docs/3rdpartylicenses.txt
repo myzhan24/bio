@@ -332,14 +332,14 @@ MIT
 
 @angular/material/card
 
+@angular/material/button
+
 @angular/material/form-field
 
 @angular/forms
 MIT
 
 @angular/material/select
-
-@angular/material/button
 
 @angular/material/grid-list
 
