@@ -28,6 +28,7 @@ export class EarthboundCardComponent implements OnInit {
   }
 
   setRandomLayers(): void {
+    console.log('mz set random layers');
     const layers = BackgroundLayer.getRandomLayers();
     this.layer1 = layers[0];
     this.layer2 = layers[1];

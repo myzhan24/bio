@@ -7,7 +7,7 @@
     <mat-card-subtitle>A TypeScript port of the background rendering engine from Nintendo's 1994 cult classic game
     </mat-card-subtitle>
   </mat-card-header>
-  <app-earthbound #earthboundComponent class="full-card-width" [layer1]="layer1" [layer2]="layer2"></app-earthbound>
+  <app-earthbound #earthboundComponent class="full-card-width" [layer1]="layer1" [layer2]="layer2" (click)="setRandomLayers()"></app-earthbound>
   <mat-card-content class="container">
     <mat-form-field>
       <mat-select [(value)]="layer1" placeholder="Layer 1">

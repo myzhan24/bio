@@ -1,8 +1,5 @@
-<canvas #earthboundCanvas class="earthbound-canvas" [class.fullscreen]="fullscreen" (click)="setRandomLayers()"></canvas>
-
-
+<canvas #earthboundCanvas class="earthbound-canvas" [class.fullscreen]="fullscreen"></canvas>
 
 <button mat-mini-fab color="secondary" (click)="exitFullscreen()" *ngIf="fullscreen" class="earthbound-fullscreen-button exit-button">✕</button>
 
 <!--<button mat-raised-button color="secondary" (click)="setRandomLayers()" *ngIf="fullscreen" class="earthbound-fullscreen-button row-button">Random</button>-->
-
